@@ -11,9 +11,9 @@ $(document).ready(function () {
        bodyHTML += '<div  class="employee" id="'+i+'">'
        bodyHTML += '<img class="image" id="'+i+'" src="'+ response.results[i].picture.medium + '" alt="Smiley face">'
        bodyHTML += '<ul class="empList" id="'+i+'" >'
-       bodyHTML += '<li id="'+i+'" >' + response.results[i].name.first +' '+ response.results[i].name.last + '</li>'
+       bodyHTML += '<li class="name" id="'+i+'" >' + response.results[i].name.first +' '+ response.results[i].name.last + '</li>'
        bodyHTML += '<li id="'+i+'" >' + response.results[i].email + '</li>'
-       bodyHTML += '<li id="'+i+'" >' + response.results[i].location.city + '</li>'
+       bodyHTML += '<li  class="city" id="'+i+'" >' + response.results[i].location.city + '</li>'
        bodyHTML += '</ul>'
        bodyHTML += '</div>'
        bodyHTML += '</a>'
@@ -28,16 +28,30 @@ $(document).ready(function () {
    
     })
 })
+function birtdayFormat(birthday) {
+    let lastDob = birthday.slice(0,10);
+    let year = lastDob.slice(2,4);
+    let month = lastDob.slice(5,7);
+    let day = lastDob.slice(8,10);
+    let convertedDob = day +'/'+month+'/'+year;
+    return convertedDob;
+}
 
 $(document).on('click','#master', function (event) {
     let clickId = event.target.id;
     let clickNum = parseInt(clickId);
-    
     let modalHTML = ""; 
+    let birtday = queryResult[0].results[clickNum].dob;
+    let newbod = birtdayFormat(birtday);
     modalHTML += '<a href="#close" title="Close" class="close">X</a>'
     modalHTML += '<img class="image" id="'+i+'" src="'+ queryResult[0].results[clickNum].picture.medium + '" alt="Smiley face">'
-    modalHTML += '<p>'+ queryResult[0].results[clickNum].name.first +' '+queryResult[0].results[clickNum].name.last +'</p>'
-    modalHTML += '<p>'+ queryResult[0].results[clickNum].location.city +'</p>'
+    modalHTML += '<p class="name">'+ queryResult[0].results[clickNum].name.first +' '+queryResult[0].results[clickNum].name.last +'</p>'
+    modalHTML += '<p>'+queryResult[0].results[clickNum].email +'</p>'
+    modalHTML += '<p class="city">'+ queryResult[0].results[clickNum].location.city +'</p>'
+    modalHTML += '<p class="phone">'+ queryResult[0].results[clickNum].phone +'</p>'
+    modalHTML += '<p >'+ queryResult[0].results[clickNum].location.street + ' '+queryResult[0].results[clickNum].location.city+ ','+ queryResult[0].results[clickNum].location.postcode +'</p>'
+    modalHTML += '<p > Birthday: '+ newbod +'</p>'
     $('#detail').html(modalHTML);
+     
 })
 
