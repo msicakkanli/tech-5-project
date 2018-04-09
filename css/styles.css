@@ -103,14 +103,18 @@ a  {
 }
 
 .modalDialog img {
-	margin-left: 70px;
-}
-
-.modalDialog p {
-	margin-left: 85px;
-    font-size: 12px;
-    color: darkgrey;
-}
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+	
+	.modalDialog p {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+			font-size: 12px;
+			color: darkgrey;
+	}
 
 .modalDialog .name {
 	font-weight: bold;
